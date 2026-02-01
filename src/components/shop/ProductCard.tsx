@@ -31,7 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/products/${product.id}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all hover:-translate-y-1 hover:shadow-md"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all hover:-translate-y-1 "
     >
       {/* Image */}
       <div className="relative h-60 bg-gray-50 overflow-hidden">
@@ -56,11 +56,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 
         {/* CTA */}
-        <div className="mt-auto">
+        <div className="mt-auto mb-2">
           <Button
             variant="primary"
             size="sm"
-            className="w-full rounded-full transition-all hover:shadow-sm active:scale-95"
+            className="w-full rounded-full transition-all active:scale-95"
             onClick={handleAddToCart}
             disabled={isAdded}
           >
