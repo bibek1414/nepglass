@@ -1,0 +1,16 @@
+
+> nepglass@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+
+✓ Starting...
+✓ Ready in 1089ms
+○ Compiling / ...
+ HEAD / 200 in 4.9s (compile: 4.5s, render: 450ms)
+ GET / 200 in 196ms (compile: 17ms, render: 178ms)
+ GET /products 200 in 1200ms (compile: 1045ms, render: 155ms)
+ GET /about 200 in 880ms (compile: 699ms, render: 182ms)
+ GET /contact 200 in 843ms (compile: 764ms, render: 79ms)
