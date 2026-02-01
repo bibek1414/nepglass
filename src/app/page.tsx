@@ -7,7 +7,7 @@ import FeatureSplit from '@/components/home/FeatureSplit';
 import WhyNepGlass from '@/components/home/WhyNepGlass';
 import Testimonials from '@/components/home/Testimonials';
 import FAQSection from '@/components/home/FAQSection';
-import Newsletter from '@/components/home/Newsletter';
+import ContactForm from '@/components/home/ContactForm';
 import HeroSection from '@/components/home/Hero-section';
 import TrustStrip from '@/components/home/TrustStrip';
 import ShopByCategory from '@/components/home/ShopByCategory';
@@ -81,8 +81,8 @@ export default function Home() {
       {/* 11. FAQ Section */}
       <FAQSection />
 
-      {/* 12. Newsletter */}
-      <Newsletter />
+      {/* 12. Contact Form */}
+      <ContactForm />
     </div>
   );
 }
