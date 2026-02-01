@@ -8,7 +8,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 
 export default function CartDrawer() {
-  const { items, isDrawerOpen, setIsDrawerOpen, updateQuantity, removeFromCart, totalPrice } = useCart();
+  const {
+    items,
+    isDrawerOpen,
+    setIsDrawerOpen,
+    updateQuantity,
+    removeFromCart,
+    totalPrice,
+  } = useCart();
 
   return (
     <AnimatePresence>
@@ -20,7 +27,7 @@ export default function CartDrawer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsDrawerOpen(false)}
-            className="fixed inset-0 z-[60] bg-black/20 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] bg-black/30 backdrop-blur-sm"
           />
 
           {/* Drawer */}
@@ -28,29 +35,29 @@ export default function CartDrawer() {
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 h-full w-full max-w-md z-[70] bg-white shadow-2xl flex flex-col"
+            transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+            className="fixed right-0 top-0 z-[70] h-full w-full max-w-md bg-white shadow-xl flex flex-col"
           >
             {/* Header */}
-            <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+            <div className="flex items-center justify-between py-3 px-6 border-b border-gray-100">
               <div className="flex items-center gap-2">
                 <ShoppingBag className="w-5 h-5 text-primary" />
-                <h2 className="text-xl font-bold text-primary">Your Cart</h2>
+                <p className=" text-lg mt-5 text-primary">Shopping Cart</p>
               </div>
               <button
                 onClick={() => setIsDrawerOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-2 rounded-full hover:bg-gray-100 transition"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Items */}
+            {/* Content */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {items.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center">
-                  <ShoppingBag className="w-16 h-16 text-gray-200 mb-4" />
-                  <p className="text-gray-500">Your cart is empty</p>
+                  <ShoppingBag className="w-14 h-14 text-gray-200 mb-4" />
+                  <p className="text-gray-500">Your cart is currently empty</p>
                   <Button
                     variant="ghost"
                     className="mt-4"
@@ -62,34 +69,57 @@ export default function CartDrawer() {
               ) : (
                 items.map((item) => (
                   <div key={item.id} className="flex gap-4">
-                    <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    {/* Image */}
+                    <div className="w-20 h-20 rounded-xl bg-gray-100 overflow-hidden shrink-0">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
+
+                    {/* Info */}
                     <div className="flex-1">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-semibold text-primary">{item.name}</h3>
-                        <p className="font-bold text-primary">Rs. {item.price}</p>
+                      <div className="flex justify-between gap-4">
+                        <h3 className="text-sm text-primary leading-snug line-clamp-2">
+                          {item.name}
+                        </h3>
+                        <span className="text-sm text-primary">
+                          Rs. {item.price}
+                        </span>
                       </div>
-                      <p className="text-xs text-gray-500 mb-4">{item.category}</p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center border border-gray-200 rounded-md">
+
+                      <p className="text-xs text-gray-400 mt-1">
+                        {item.category}
+                      </p>
+
+                      {/* Actions */}
+                      <div className="mt-4 flex items-center justify-between">
+                        <div className="flex items-center rounded-full border border-gray-200 overflow-hidden">
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="p-1 hover:bg-gray-50"
+                            onClick={() =>
+                              updateQuantity(item.id, item.quantity - 1)
+                            }
+                            className="px-3 py-1 hover:bg-gray-50"
                           >
-                            <Minus className="w-4 h-4" />
+                            <Minus className="w-3 h-3" />
                           </button>
-                          <span className="px-3 text-sm font-medium">{item.quantity}</span>
+                          <span className="px-3 text-sm">
+                            {item.quantity}
+                          </span>
                           <button
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="p-1 hover:bg-gray-50"
+                            onClick={() =>
+                              updateQuantity(item.id, item.quantity + 1)
+                            }
+                            className="px-3 py-1 hover:bg-gray-50"
                           >
-                            <Plus className="w-4 h-4" />
+                            <Plus className="w-3 h-3" />
                           </button>
                         </div>
+
                         <button
                           onClick={() => removeFromCart(item.id)}
-                          className="text-xs text-red-500 hover:underline"
+                          className="text-xs text-gray-400 hover:text-red-500 transition"
                         >
                           Remove
                         </button>
@@ -102,18 +132,22 @@ export default function CartDrawer() {
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="p-6 border-t border-gray-100 bg-gray-50">
-                <div className="flex justify-between items-center mb-6">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span className="text-2xl font-bold text-primary">Rs. {totalPrice}</span>
+              <div className="border-t border-gray-100 bg-gray-50 p-6">
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-sm text-gray-600">Subtotal</span>
+                  <span className="text-xl text-primary">
+                    Rs. {totalPrice}
+                  </span>
                 </div>
+
                 <Link href="/checkout" onClick={() => setIsDrawerOpen(false)}>
-                  <Button className="w-full" size="lg">
+                  <Button size="lg" className="w-full rounded-full">
                     Proceed to Checkout
                   </Button>
                 </Link>
-                <p className="text-center text-xs text-gray-500 mt-4">
-                  Shipping and taxes calculated at checkout
+
+                <p className="mt-4 text-center text-xs text-gray-400">
+                  Shipping & taxes calculated at checkout
                 </p>
               </div>
             )}
