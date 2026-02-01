@@ -30,7 +30,7 @@ const steps = [
 export default function LensProcess() {
     return (
         <div className="bg-gray-50 py-5">
-            <div className="container-custom max-w-5xl mx-auto">
+            <div className="container-custom max-w-6xl mx-auto">
                 <div className="text-center md:text-left mb-12">
                     <h2 className="text-primary text-3xl md:text-4xl font-bold">
                         <p className="text-secondary font-bold uppercase tracking-widest text-sm mb-2">

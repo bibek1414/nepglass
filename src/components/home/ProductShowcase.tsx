@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import ProductCard from '@/components/shop/ProductCard';
 
 interface Product {
@@ -29,11 +29,11 @@ export default function ProductShowcase({ title, subtitle, products }: ProductSh
                         <h2 className="text-primary mt-0 mb-0">{title}</h2>
                     </div>
                     <Link href="/products" className="group flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors">
-                        View All Products <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        View All Products <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {products.map(product => (
                         <ProductCard key={product.id} product={product} />
                     ))}

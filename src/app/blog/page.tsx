@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Calendar, User } from 'lucide-react';
+import { ChevronRight, Calendar, User } from 'lucide-react';
 
 const blogPosts = [
   {
@@ -87,7 +87,7 @@ export default function BlogListingPage() {
                   {post.excerpt}
                 </p>
                 <span className="inline-flex items-center font-bold text-primary group-hover:text-secondary transition-colors mt-auto">
-                  Read Article <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  Read Article <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             ))}

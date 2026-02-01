@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
-import { ArrowRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 interface FeatureSplitProps {
     title: string;
@@ -45,7 +45,7 @@ export default function FeatureSplit({
                     </p>
                     <Link href={ctaLink}>
                         <Button variant="outline" size="lg" className="group">
-                            {ctaText} <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                            {ctaText} <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
                     </Link>
                 </div>

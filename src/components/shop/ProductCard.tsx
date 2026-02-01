@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Check } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import Button from '../ui/Button';
 
@@ -18,11 +18,14 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
+  const [isAdded, setIsAdded] = React.useState(false);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     addToCart(product);
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
   };
 
   return (
@@ -42,28 +45,39 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Content */}
 
 
-     <div className='px-4 py-2'>
-       <h3 className="text-base text-primary leading-snug ">
-        {product.name}
-      </h3>
+      <div className='px-4'>
+        <div className="text-bold font-semibold text-primary leading-snug  mt-5">
+          {product.name}
+          <p className="text-sm text-primary font-light">
+            Rs. {product.price}
+          </p>
+        </div>
 
-      <p className="text-lg text-primary mb-4">
-        Rs. {product.price}
-      </p>
 
-      {/* CTA */}
-      <div className="mt-auto">
-        <Button
-          variant="primary"
-          size="sm"
-          className="w-full rounded-full transition-all hover:shadow-sm active:scale-95"
-          onClick={handleAddToCart}
-        >
-          <ShoppingCart className="mr-2 h-4 w-4" />
-          Add to Cart
-        </Button>
+
+        {/* CTA */}
+        <div className="mt-auto">
+          <Button
+            variant="primary"
+            size="sm"
+            className="w-full rounded-full transition-all hover:shadow-sm active:scale-95"
+            onClick={handleAddToCart}
+            disabled={isAdded}
+          >
+            {isAdded ? (
+              <>
+                <Check className="mr-2 h-4 w-4" />
+                Added
+              </>
+            ) : (
+              <>
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                Add to Cart
+              </>
+            )}
+          </Button>
+        </div>
       </div>
-     </div>
     </Link>
   );
 }

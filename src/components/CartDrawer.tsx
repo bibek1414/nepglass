@@ -68,61 +68,65 @@ export default function CartDrawer() {
                 </div>
               ) : (
                 items.map((item) => (
-                  <div key={item.id} className="flex gap-4">
+                  <div key={item.id} className="group relative flex gap-4 bg-white p-2 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
                     {/* Image */}
-                    <div className="w-20 h-20 rounded-xl bg-gray-100 overflow-hidden shrink-0">
+                    <Link href={`/products/${item.id}`} onClick={() => setIsDrawerOpen(false)} className="w-24 h-24 rounded-xl bg-gray-100 overflow-hidden shrink-0 border border-gray-100">
                       <img
                         src={item.image}
                         alt={item.name}
                         className="w-full h-full object-cover"
                       />
-                    </div>
+                    </Link>
 
                     {/* Info */}
-                    <div className="flex-1">
-                      <div className="flex justify-between gap-4">
-                        <h3 className="text-sm text-primary leading-snug line-clamp-2">
-                          {item.name}
-                        </h3>
-                        <span className="text-sm text-primary">
-                          Rs. {item.price}
-                        </span>
+                    <div className="flex-1 flex flex-col justify-between py-1">
+                      <div>
+                        <div className="flex justify-between items-start gap-2">
+                          <Link href={`/products/${item.id}`} onClick={() => setIsDrawerOpen(false)} className='hover:text-secondary transition-colors'>
+                            <h3 className="text-sm font-semibold text-primary leading-tight line-clamp-2">
+                              {item.name}
+                            </h3>
+                          </Link>
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="text-gray-300 hover:text-red-500 transition-colors p-1 -mr-1 -mt-1"
+                            aria-label="Remove item"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <p className="text-xs text-gray-400 font-medium mt-1">
+                          {item.category}
+                        </p>
                       </div>
 
-                      <p className="text-xs text-gray-400 mt-1">
-                        {item.category}
-                      </p>
-
-                      {/* Actions */}
-                      <div className="mt-4 flex items-center justify-between">
-                        <div className="flex items-center rounded-full border border-gray-200 overflow-hidden">
+                      {/* Controls */}
+                      <div className="flex items-end justify-between mt-2">
+                        <div className="flex items-center rounded-lg border border-gray-200 bg-white shadow-sm h-8">
                           <button
                             onClick={() =>
                               updateQuantity(item.id, item.quantity - 1)
                             }
-                            className="px-3 py-1 hover:bg-gray-50"
+                            className="w-8 h-full flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors rounded-l-lg"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="px-3 text-sm">
+                          <span className="w-8 text-center text-xs font-semibold text-primary">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() =>
                               updateQuantity(item.id, item.quantity + 1)
                             }
-                            className="px-3 py-1 hover:bg-gray-50"
+                            className="w-8 h-full flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors rounded-r-lg"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
                         </div>
 
-                        <button
-                          onClick={() => removeFromCart(item.id)}
-                          className="text-xs text-gray-400 hover:text-red-500 transition"
-                        >
-                          Remove
-                        </button>
+                        <span className="text-sm font-bold text-primary">
+                          Rs. {item.price * item.quantity}
+                        </span>
                       </div>
                     </div>
                   </div>

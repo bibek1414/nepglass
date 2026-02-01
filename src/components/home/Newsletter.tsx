@@ -3,7 +3,7 @@
 import React from 'react';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import { Mail, Phone, ArrowRight } from 'lucide-react';
+import { Mail, Phone, ChevronRight } from 'lucide-react';
 
 export default function Newsletter() {
     return (
@@ -42,7 +42,7 @@ export default function Newsletter() {
 
                         <Link href="/contact">
                             <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                                Visit Our Stores <ArrowRight className="ml-2 w-4 h-4" />
+                                Visit Our Stores <ChevronRight className="ml-2 w-4 h-4" />
                             </Button>
                         </Link>
                     </div>

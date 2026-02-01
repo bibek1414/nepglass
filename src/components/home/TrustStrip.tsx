@@ -26,7 +26,7 @@ const items = [
 export default function TrustStrip() {
     return (
         <section className="bg-white border-y border-gray-100 py-6">
-            <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 {items.map((item, i) => (
                     <div
                         key={i}

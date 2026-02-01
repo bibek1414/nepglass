@@ -14,7 +14,8 @@ import {
   Star,
   Minus,
   Plus,
-  Info
+  Info,
+  Check
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -23,6 +24,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const { addToCart } = useCart();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
 
   const product = products.find(p => p.id === id);
 
@@ -47,7 +49,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     // We could update it to take a quantity, but for now we'll just call it N times or leave it as is.
     // Actually, I should probably update the context to handle quantity if I want to be thorough.
     // For this mock, I'll just call addToCart once and keep the quantity state for display.
-    addToCart(product);
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
   };
 
   return (
@@ -85,8 +91,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           {/* Content */}
           <div className="py-2">
             <div className="flex justify-between items-start mb-4">
-               <p className="text-secondary font-bold uppercase tracking-widest text-xs">{product.category}</p>
-               <p className="text-xs text-gray-400 font-medium">SKU: {product.sku}</p>
+              <p className="text-secondary font-bold uppercase tracking-widest text-xs">{product.category}</p>
+              <p className="text-xs text-gray-400 font-medium">SKU: {product.sku}</p>
             </div>
             <h1 className="text-primary mt-0 mb-6">{product.name}</h1>
 
@@ -107,30 +113,30 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Options */}
             <div className="space-y-8 mb-12">
-               {product.options?.colors && (
-                 <div>
-                   <p className="text-sm font-bold text-primary mb-4 uppercase tracking-wider">Color</p>
-                   <div className="flex gap-3">
-                     {product.options.colors.map(color => (
-                       <button key={color} className="px-4 py-2 border border-gray-200 rounded-full text-sm font-medium hover:border-primary transition-colors">
-                         {color}
-                       </button>
-                     ))}
-                   </div>
-                 </div>
-               )}
-               {product.options?.sizes && (
-                 <div>
-                   <p className="text-sm font-bold text-primary mb-4 uppercase tracking-wider">Size</p>
-                   <div className="flex gap-3">
-                     {product.options.sizes.map(size => (
-                       <button key={size} className="px-4 py-2 border border-gray-200 rounded-full text-sm font-medium hover:border-primary transition-colors">
-                         {size}
-                       </button>
-                     ))}
-                   </div>
-                 </div>
-               )}
+              {product.options?.colors && (
+                <div>
+                  <p className="text-sm font-bold text-primary mb-4 uppercase tracking-wider">Color</p>
+                  <div className="flex gap-3">
+                    {product.options.colors.map(color => (
+                      <button key={color} className="px-4 py-2 border border-gray-200 rounded-full text-sm font-medium hover:border-primary transition-colors">
+                        {color}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {product.options?.sizes && (
+                <div>
+                  <p className="text-sm font-bold text-primary mb-4 uppercase tracking-wider">Size</p>
+                  <div className="flex gap-3">
+                    {product.options.sizes.map(size => (
+                      <button key={size} className="px-4 py-2 border border-gray-200 rounded-full text-sm font-medium hover:border-primary transition-colors">
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Quantity and CTA */}
@@ -150,9 +156,18 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   <Plus className="w-5 h-5" />
                 </button>
               </div>
-              <Button size="lg" className="flex-1 rounded-xl shadow-xl shadow-primary/10" onClick={handleAddToCart}>
-                <ShoppingCart className="w-5 h-5 mr-2" />
-                Add to Cart
+              <Button size="lg" className="flex-1 rounded-xl shadow-xl shadow-primary/10" onClick={handleAddToCart} disabled={isAdded}>
+                {isAdded ? (
+                  <>
+                    <Check className="w-5 h-5 mr-2" />
+                    Added to Cart
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="w-5 h-5 mr-2" />
+                    Add to Cart
+                  </>
+                )}
               </Button>
             </div>
 
@@ -174,17 +189,17 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Specifications */}
             <div className="space-y-4">
-               <h4 className="font-bold text-primary flex items-center gap-2">
-                 <Info className="w-4 h-4 text-secondary" /> Specifications
-               </h4>
-               <ul className="grid grid-cols-2 gap-y-3 gap-x-8">
-                 {product.features?.map((feature, i) => (
-                   <li key={i} className="flex items-center gap-3 text-sm text-gray-600">
-                     <div className="w-1.5 h-1.5 bg-secondary rounded-full" />
-                     {feature}
-                   </li>
-                 ))}
-               </ul>
+              <h4 className="font-bold text-primary flex items-center gap-2">
+                <Info className="w-4 h-4 text-secondary" /> Specifications
+              </h4>
+              <ul className="grid grid-cols-2 gap-y-3 gap-x-8">
+                {product.features?.map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-gray-600">
+                    <div className="w-1.5 h-1.5 bg-secondary rounded-full" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -207,7 +222,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                     <span className="text-xs text-gray-400">{review.date}</span>
                   </div>
-                  <p className="text-gray-600 leading-relaxed italic">"{review.text}"</p>
+                  <p className="text-gray-600 leading-relaxed italic">&quot;{review.text}&quot;</p>
                 </div>
               ))}
             </div>

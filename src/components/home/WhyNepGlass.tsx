@@ -32,10 +32,8 @@ export default function WhyNepGlass() {
             <div className="container-custom">
 
                 {/* Heading */}
-                <div className="max-w-2xl mb-14">
-                    <span className="text-secondary text-sm tracking-wide uppercase">
-                        Our Values
-                    </span>
+                <div className="max-w-4xl mb-14">
+
                     <h2 className="text-primary mt-3 mb-4">
                         Why Choose NepGlass
                     </h2>
@@ -45,13 +43,13 @@ export default function WhyNepGlass() {
                 </div>
 
                 {/* Features */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {features.map((feature, i) => (
                         <div
                             key={i}
                             className="group p-6 rounded-2xl border border-gray-100 hover:border-secondary/30  transition-all"
                         >
-                            <div className="mb-5 inline-flex p-3 rounded-xl bg-secondary/10 group-hover:bg-secondary/15 transition">
+                            <div className="mb-2 inline-flex p-3 rounded-xl bg-secondary/10 group-hover:bg-secondary/15 transition">
                                 {feature.icon}
                             </div>
                             <h4 className="text-lg text-primary mb-2">

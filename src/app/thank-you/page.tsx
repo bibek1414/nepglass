@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
-import { CheckCircle2, Package, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Package, ChevronRight } from 'lucide-react';
 
 export default function ThankYouPage() {
   return (
@@ -30,7 +30,7 @@ export default function ThankYouPage() {
       <Link href="/products">
         <Button size="lg">
           Continue Shopping
-          <ArrowRight className="w-5 h-5 ml-2" />
+          <ChevronRight className="w-5 h-5 ml-2" />
         </Button>
       </Link>
     </div>

@@ -56,7 +56,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prevItems, { ...newItem, quantity: 1 }];
     });
-    setIsDrawerOpen(true);
   };
 
   const removeFromCart = (id: string) => {
