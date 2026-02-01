@@ -24,25 +24,31 @@ export default function AboutPage() {
             />
           </div>
           <div>
-            <h2 className="text-primary mt-0">Quality Craftsmanship</h2>
-            <p className="text-gray-600 mb-6">
-              Based in Nepal, we specialize in premium lens solutions, stylish frames, and trendsetting sunglasses that elevate everyday look and protect your vision.
-            </p>
-            <p className="text-gray-600 mb-6">
-              We combine quality craftsmanship with modern aesthetics, offering a curated selection of products suited for every face, lifestyle, and budget. Whether you’re updating your prescription lenses, choosing a classic frame, or picking out polarized sunglasses for sunny days, NepGlass makes the experience seamless and personal.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="w-6 h-6 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-xs font-bold">1</span>
-                <span className="font-medium text-primary">Stylish & Versatile Selection</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-6 h-6 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-xs font-bold">2</span>
-                <span className="font-medium text-primary">Vision First: Precision Fitting</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-6 h-6 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-xs font-bold">3</span>
-                <span className="font-medium text-primary">Designed for Local Needs</span>
+            <div>
+              <h2 className="text-primary mt-0">Why NepGlass?</h2>
+              <p className="text-gray-600 mb-6">
+                At NepGlass, we see eyewear as more than just a visual aid — it's a statement of style, comfort, and confidence. Based in Nepal, we specialize in premium lens solutions, stylish frames, and trendsetting sunglasses that elevate everyday look and protect your vision.
+              </p>
+              <p className="text-gray-600 mb-6">
+                We combine quality craftsmanship with modern aesthetics, offering a curated selection of products suited for every face, lifestyle, and budget. Whether you're updating your prescription lenses, choosing a classic frame, or picking out polarized sunglasses for sunny days, NepGlass makes the experience seamless and personal.
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="w-6 h-6 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-xs font-bold">1</span>
+                  <span className="font-medium text-primary">Stylish & Versatile Selection</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-6 h-6 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                  <span className="font-medium text-primary">Vision First: High-quality lenses</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-6 h-6 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                  <span className="font-medium text-primary">Made for Nepal: Local preferences</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-6 h-6 bg-secondary/20 text-secondary rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                  <span className="font-medium text-primary">Personalized Service: Expert guidance</span>
+                </div>
               </div>
             </div>
           </div>

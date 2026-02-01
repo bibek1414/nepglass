@@ -20,10 +20,10 @@ export default function Button({
   const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
 
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary/90 focus:ring-primary',
-    secondary: 'bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary',
-    outline: 'border-2 border-primary text-primary hover:bg-primary/5 focus:ring-primary',
-    ghost: 'text-primary hover:bg-primary/5 focus:ring-primary',
+    primary: 'bg-primary text-white hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200',
+    secondary: 'bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-200',
+    outline: 'border-2 border-primary text-primary hover:bg-primary/5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200',
+    ghost: 'text-primary hover:bg-primary/5 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200',
   };
 
   const sizes = {

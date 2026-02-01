@@ -1,103 +1,137 @@
 'use client';
 
 import React, { use } from 'react';
-import { posts } from '@/data/posts';
 import Link from 'next/link';
-import { ChevronLeft, Calendar, User, Tag, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Clock, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
 export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  // Simulate fetching post data based on slug
   const { slug } = use(params);
-  const post = posts.find(p => p.slug === slug);
 
-  if (!post) {
-    return (
-      <div className="container-custom py-40 text-center">
-        <h1 className="text-primary">Article Not Found</h1>
-        <Link href="/blog" className="text-secondary hover:underline mt-4 block">Return to Blog</Link>
-      </div>
-    );
-  }
+  // Mock data - normally would fetch from API/CMS
+  const post = {
+    title: "Choosing the Right Frames for Your Face Shape",
+    date: "Jan 15, 2025",
+    author: "Dr. Sharma",
+    category: "Style Guide",
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&q=80&w=1200",
+    content: (
+      <>
+        <p className="lead text-xl text-gray-600 mb-8 font-serif">
+          Not all glasses are created equal, and neither are faces. Finding the perfect pair is about balancing your features and highlighting your best angles. Here is our comprehensive guide to finding your perfect match using the science of face shapes.
+        </p>
+
+        <h2 className="text-2xl font-bold text-primary mt-12 mb-6">Determining Your Face Shape</h2>
+        <p className="mb-6">
+          Before you start shopping, pull your hair back and look in the mirror. Trace the outline of your face on the mirror with lipstick or a dry-erase marker (or just visualize it). What shape do you see?
+        </p>
+
+        <h3 className="text-xl font-bold text-primary mt-8 mb-4">1. Round Face</h3>
+        <p className="mb-6">
+          <strong>Features:</strong> Full cheeks, rounded chin, equal width and length.<br />
+          <strong>Best Frames:</strong> Angular, geometric frames like rectangular or square shapes add definition and structure. Avoid round frames which can exaggerate roundness.
+        </p>
+
+        <h3 className="text-xl font-bold text-primary mt-8 mb-4">2. Square Face</h3>
+        <p className="mb-6">
+          <strong>Features:</strong> Strong jawline, broad forehead, equal width and length.<br />
+          <strong>Best Frames:</strong> Round, oval, or cat-eye frames soften strong angles. Thinner frames generally work better than heavy, blocky ones.
+        </p>
+
+        <h3 className="text-xl font-bold text-primary mt-8 mb-4">3. Oval Face</h3>
+        <p className="mb-6">
+          <strong>Features:</strong> Balanced proportions, slightly high cheekbones, chin narrower than forehead.<br />
+          <strong>Best Frames:</strong> Lucky you! Almost any shape works. Experiment with bold shapes, aviators, or oversized frames. Just ensure the frame is as wide as the widest part of your face.
+        </p>
+
+        <div className="bg-gray-50 p-8 rounded-2xl border-l-4 border-secondary my-10">
+          <p className="italic text-gray-700 font-medium">
+            "The most important rule? Confidence. If you love how you look in a pair of glasses, that's the right pair for you."
+          </p>
+        </div>
+
+        <h2 className="text-2xl font-bold text-primary mt-12 mb-6">The NepGlass Fit</h2>
+        <p className="mb-6">
+          At NepGlass, we understand that Nepali face shapes can vary. Our "Made for Nepal" collection features specifically designed nose pads and frame widths to ensuring a comfortable fit that doesn't slide down or pinch.
+        </p>
+
+        <p>
+          Visit one of our stores in Kathmandu for a personalized fitting session with our style experts.
+        </p>
+      </>
+    )
+  };
 
   return (
-    <article className="pb-20">
-      <header className="bg-gray-50 pt-32 pb-20">
+    <div className="pb-20">
+      <div className="bg-primary/5 pb-20 pt-32">
         <div className="container-custom">
-          <Link href="/blog" className="text-gray-500 text-sm flex items-center gap-2 mb-8 hover:text-primary transition-colors">
-            <ChevronLeft className="w-4 h-4" /> Back to Blog
+          <Link href="/blog" className="inline-flex items-center text-sm font-bold text-gray-500 hover:text-primary mb-8 transition-colors">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Blog
           </Link>
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-6 text-sm text-gray-500 mb-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="flex justify-center items-center gap-4 text-sm font-bold uppercase tracking-wider text-secondary mb-6">
+              <span>{post.category}</span>
+              <span className="w-1 h-1 bg-gray-300 rounded-full" />
+              <span className="text-gray-500 font-medium normal-case flex items-center gap-2"><Clock className="w-4 h-4" /> {post.readTime}</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl text-primary font-bold mb-8 leading-tight">
+              {post.title}
+            </h1>
+            <div className="flex items-center justify-center gap-6 text-sm text-gray-500">
+              <span className="flex items-center gap-2">
+                <User className="w-4 h-4" /> {post.author}
+              </span>
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" /> {post.date}
               </span>
-              <span className="flex items-center gap-2">
-                <Tag className="w-4 h-4" /> {post.category}
-              </span>
             </div>
-            <h1 className="text-primary mt-0 mb-8 leading-tight">{post.title}</h1>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-secondary text-white rounded-full flex items-center justify-center font-bold">
-                {post.author[0]}
-              </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-custom -mt-12">
+        <div className="max-w-4xl mx-auto">
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full aspect-video object-cover rounded-3xl shadow-2xl mb-16"
+          />
+
+          <div className="grid md:grid-cols-[1fr_250px] gap-12">
+            <article className="prose prose-lg prose-headings:text-primary prose-a:text-secondary max-w-none text-gray-600">
+              {post.content}
+            </article>
+
+            <aside className="space-y-12">
               <div>
-                <p className="font-bold text-primary mb-0">{post.author}</p>
-                <p className="text-xs text-gray-500">Eyewear Specialist</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <section className="py-20">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
-            <div className="aspect-video rounded-3xl overflow-hidden mb-16 shadow-2xl">
-              <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-            </div>
-
-            <div
-              className="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-8"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-
-            <div className="mt-20 pt-10 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6">
-              <div className="flex gap-4">
-                <Button variant="outline" size="sm" className="rounded-full">
-                  <Share2 className="w-4 h-4 mr-2" /> Share Article
-                </Button>
-              </div>
-              <div className="flex gap-2">
-                {['Eye Health', 'Nepal', 'Style'].map(tag => (
-                  <span key={tag} className="px-3 py-1 bg-gray-50 text-gray-500 text-xs rounded-full border border-gray-100">
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Recommended Posts */}
-      <section className="bg-gray-50 py-20 mt-20">
-        <div className="container-custom">
-          <h3 className="text-primary text-center mb-12">Related Articles</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {posts.filter(p => p.slug !== slug).slice(0, 2).map(p => (
-              <Link key={p.slug} href={`/blog/${p.slug}`} className="bg-white p-6 rounded-2xl flex gap-6 hover:shadow-md transition-shadow group">
-                <div className="w-24 h-24 rounded-xl overflow-hidden shrink-0">
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                <h4 className="font-bold text-primary mb-4 uppercase text-xs tracking-widest">Share this article</h4>
+                <div className="flex gap-4">
+                  <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-colors">
+                    <Facebook className="w-4 h-4" />
+                  </button>
+                  <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-colors">
+                    <Twitter className="w-4 h-4" />
+                  </button>
+                  <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-primary hover:bg-secondary hover:text-white transition-colors">
+                    <Linkedin className="w-4 h-4" />
+                  </button>
                 </div>
-                <div>
-                  <h4 className="font-bold text-primary mb-2 line-clamp-2 group-hover:text-secondary transition-colors leading-tight">{p.title}</h4>
-                  <p className="text-xs text-gray-500">{p.date}</p>
-                </div>
-              </Link>
-            ))}
+              </div>
+
+              <div className="bg-primary text-white p-8 rounded-2xl text-center">
+                <h4 className="text-xl font-bold mb-4">Find Your Look</h4>
+                <p className="text-gray-300 text-sm mb-6">Browse our latest collection tailored for style and comfort.</p>
+                <Link href="/products">
+                  <Button variant="secondary" className="w-full">Shop Now</Button>
+                </Link>
+              </div>
+            </aside>
           </div>
         </div>
-      </section>
-    </article>
+      </div>
+    </div>
   );
 }
