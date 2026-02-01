@@ -2,45 +2,73 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Search, ShoppingCart, Menu, X } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { totalItems, setIsDrawerOpen } = useCart();
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Products', href: '/products' },
+    { name: 'About', href: '/about' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact', href: '/contact' },
+  ];
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="container-custom h-20 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-primary shrink-0">
-          NepGlass
+        <Link href="/" className="text-2xl font-bold text-primary shrink-0 tracking-tight">
+          Nep<span className="text-secondary">Glass</span>
         </Link>
 
         {/* Search - Centered */}
-        <div className="hidden md:flex flex-1 max-w-md mx-4">
+        <div className="hidden md:flex flex-1 max-w-sm mx-4">
           <div className="relative w-full">
             <input
               type="text"
-              placeholder="Search premium eyewear..."
-              className="w-full h-10 pl-10 pr-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-gray-50/50 transition-all"
+              placeholder="Search products, blog..."
+              className="w-full h-10 pl-10 pr-4 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-secondary/20 focus:border-secondary bg-gray-50/50 transition-all text-sm"
             />
             <Search className="absolute left-3 top-2.5 text-gray-400 w-5 h-5" />
           </div>
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link href="/products" className="hover:text-secondary transition-colors">Products</Link>
-          <Link href="/about" className="hover:text-secondary transition-colors">About</Link>
-          <Link href="/contact" className="hover:text-secondary transition-colors">Contact</Link>
+        <div className="hidden md:flex items-center gap-8">
+          <div className="flex items-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-bold transition-colors hover:text-secondary",
+                  pathname === link.href ? "text-secondary" : "text-primary"
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="relative p-2.5 hover:bg-gray-100 rounded-full transition-colors group"
           >
-            <ShoppingCart className="w-6 h-6 text-primary" />
+            <ShoppingCart className="w-6 h-6 text-primary group-hover:text-secondary transition-colors" />
             {totalItems > 0 && (
-              <span className="absolute top-0 right-0 bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+              <span className="absolute top-1 right-1 bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white">
                 {totalItems}
               </span>
             )}
@@ -48,17 +76,14 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="flex md:hidden items-center gap-4">
-          <button className="p-2">
-            <Search className="w-6 h-6 text-primary" />
-          </button>
+        <div className="flex md:hidden items-center gap-2">
           <button
             onClick={() => setIsDrawerOpen(true)}
             className="relative p-2"
           >
             <ShoppingCart className="w-6 h-6 text-primary" />
             {totalItems > 0 && (
-              <span className="absolute top-0 right-0 bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+              <span className="absolute top-0 right-0 bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white">
                 {totalItems}
               </span>
             )}
@@ -71,10 +96,30 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-b border-gray-100 py-4 px-4 flex flex-col gap-4">
-          <Link href="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
-          <Link href="/about" onClick={() => setIsMenuOpen(false)}>About</Link>
-          <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+        <div className="md:hidden bg-white border-b border-gray-100 py-6 px-6 flex flex-col gap-6">
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="w-full h-12 pl-12 pr-4 rounded-xl border border-gray-200 focus:outline-none bg-gray-50"
+            />
+            <Search className="absolute left-4 top-3.5 text-gray-400 w-5 h-5" />
+          </div>
+          <div className="flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  "text-lg font-bold",
+                  pathname === link.href ? "text-secondary" : "text-primary"
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </nav>
